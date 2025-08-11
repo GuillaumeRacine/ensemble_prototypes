@@ -1,0 +1,71 @@
+# Environment variables
+.env
+.env.local
+.env.production
+.env.development
+.env.test
+.env.*
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Dependencies
+node_modules/
+venv/
+env/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Build outputs
+dist/
+build/
+*.egg-info/
+.eggs/
+target/
+out/
+
+# Logs
+*.log
+logs/
+*.log.*
+
+# Testing
+.coverage
+.pytest_cache/
+.tox/
+coverage/
+*.cover
+.hypothesis/
+
+# Package files
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.bak
+*.backup
+
+# API keys and secrets
+*.key
+*.pem
+*.cert
+secrets/
+credentials/
