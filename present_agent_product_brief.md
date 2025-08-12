@@ -1,166 +1,3 @@
-# Present Agent - Product Brief
-
-## Business Model Canvas (Executive Summary)
-
-### 🎯 **Value Propositions**
-**Core Value:** Transform gift-giving from stressful obligation to joyful relationship investment
-- **For Individuals:** AI that understands your relationships and finds perfect gifts in 3 minutes
-- **For Recipients:** Receive gifts that genuinely express care and strengthen bonds
-- **For Society:** Reduce $75B annual gift waste through meaningful, targeted giving
-
-**Unique Value Drivers:**
-- Relationship intelligence > product recommendations
-- Complete experience orchestration (conversation → unboxing → impact)
-- Cultural sensitivity across 100+ cultures
-- Network effect learning (everyone gets smarter together)
-
-### 👥 **Customer Segments**
-**Primary:** Relationship-conscious gift givers, ages 25-45
-- Urban/suburban professionals with disposable income
-- Active on social platforms (Instagram/WhatsApp)
-- Value relationships but time-constrained
-- Give 5+ gifts annually, $30-200 per gift
-- Care about sustainability and thoughtfulness
-
-**Secondary Segments:**
-- Busy parents managing family gift obligations
-- Long-distance relationship maintainers
-- Corporate gift coordinators
-- Cultural bridge-builders (mixed relationships)
-
-### 💰 **Revenue Streams**
-**Multi-layer Monetization:**
-1. **Transaction-based** (60% of revenue)
-   - 10-15% commission on gift purchases
-   - Premium delivery fees ($15-50)
-   - Rush processing ($25+ for same-day)
-
-2. **Subscription** (25% of revenue)
-   - Individual: $20/month (AI concierge, unlimited access)
-   - Family: $40/month (covers 5 people, shared calendar)
-   - Corporate: $200/month (team gifting, bulk discounts)
-
-3. **Value-added Services** (15% of revenue)
-   - Custom AR experiences ($20)
-   - Professional gift coordination ($200+)
-   - AI-generated video messages ($10)
-   - Premium packaging ($15-30)
-
-**Target Economics:** $50 ARPU, 40% gross margin, 18-month payback
-
-### 🏗 **Key Resources**
-**Data Assets (Primary Moat):**
-- Relationship intelligence database
-- Gift outcome history (success/failure patterns)
-- Cultural appropriateness knowledge base
-- User behavioral patterns and preferences
-
-**Technical Infrastructure:**
-- 5-database hybrid architecture (PostgreSQL, Neo4j, Vector DB, Redis, Event Store)
-- AI/ML pipeline (GPT-4.1, RAG, Vector search)
-- Multi-platform integrations (Meta, WhatsApp, payment processors)
-
-**Human Capital:**
-- AI/ML engineers with personalization expertise
-- Cultural consultants and relationship psychologists
-- Partnership managers for vendor relationships
-
-### 🤝 **Key Partnerships**
-**Technology Partners:**
-- OpenAI (GPT-4.1 API access and optimization)
-- Meta Business Platform (Instagram/Messenger integration)
-- Vector database providers (Pinecone/Weaviate)
-- Payment processors (Stripe, international)
-
-**Commerce Partners:**
-- Artisan marketplaces (Etsy, local craftspeople)
-- Sustainable brands (BCorp, eco-friendly products)
-- Experience providers (local activities, subscriptions)
-- International shipping partners
-
-**Strategic Alliances:**
-- Relationship coaching platforms
-- Wedding/event planning services
-- Corporate wellness programs
-- Cultural organizations for appropriateness guidance
-
-### 🎯 **Customer Relationships**
-**Relationship Type:** Personal AI Assistant (high intimacy, high frequency)
-
-**Acquisition Strategy:**
-- Organic viral growth through gift recipient experience
-- Social proof through gift success stories
-- Instagram/TikTok content marketing (#PresentAgentMagic)
-- Influencer partnerships with lifestyle content creators
-
-**Retention Mechanisms:**
-- Relationship memory system (switching cost)
-- Occasion calendar with proactive reminders
-- Continuous learning improvement (gets better over time)
-- Social features (gift inspiration sharing)
-
-### 📱 **Channels**
-**Primary Distribution:**
-- Native messaging platform integrations (Instagram DM, WhatsApp)
-- Progressive web app for complex interactions
-- API integrations for third-party services
-
-**Marketing Channels:**
-- Social media advertising (Instagram, TikTok)
-- Content marketing (relationship tips, gift guides)
-- Referral program (both giver and recipient incentives)
-- Partnership integrations (calendar apps, social platforms)
-
-### 💡 **Key Activities**
-**Product Development:**
-- AI model training and optimization
-- Cultural intelligence database expansion
-- User experience refinement
-- Platform integration development
-
-**Operations:**
-- Vendor relationship management
-- Quality assurance and cultural sensitivity review
-- Customer support and relationship coaching
-- Data analysis and pattern recognition
-
-**Marketing & Growth:**
-- Content creation and social media presence
-- Partnership development and management
-- User onboarding and retention optimization
-- Brand building and thought leadership
-
-### 💸 **Cost Structure**
-**Technology Costs (40% of expenses):**
-- AI/ML infrastructure and API costs (OpenAI, vector search)
-- Database hosting and scaling (Neo4j, PostgreSQL, Redis)
-- Development and engineering salaries
-
-**Operations Costs (35% of expenses):**
-- Payment processing fees
-- Customer acquisition costs
-- Vendor relationship management
-- Quality assurance and content moderation
-
-**Overhead (25% of expenses):**
-- General administrative expenses
-- Legal and compliance
-- Office and remote work infrastructure
-- Insurance and business services
-
-### 🎯 **Success Metrics**
-**Market Validation:**
-- Product-Market Fit: NPS >50, >70% find recommendations better than alternatives
-- Viral Coefficient: >0.5 (each user brings 0.5 new users through gifts)
-- Network Effects: Recommendation accuracy improves measurably with user base
-
-**Business Viability:**
-- Unit Economics: CAC/LTV <0.3, 18-month payback
-- Revenue Growth: Path to $10K MRR in 6 months, $1M ARR in 2 years
-- Market Penetration: 100K users by year 2, 1M by year 5
-
----
-
 ## 1. Problem
 
 **Description:** Gift-giving is fundamentally broken - people waste hours searching for meaningful presents, miss emotional nuances of relationships, and default to generic choices that fail to express genuine care or strengthen bonds.
@@ -346,6 +183,154 @@ Experience Layer:
 - **Risk if false:** Cultural missteps damage brand and limit international expansion
 - **Experiment:** Week 3-5 - Test cultural appropriateness across 10+ cultures with native speakers, measure error rates
 
+# Present Agent - Product Brief
+
+## Business Model Canvas
+
+### 🎯 **Value Propositions**
+**Core Value:** Transform gift-giving from stressful obligation to joyful relationship investment
+- **For Individuals:** AI that understands your relationships and finds the best gifts in 2 minutes or less
+- **For Recipients:** Receive gifts that genuinely express care and strengthen bonds
+- **For Society:** Reduce $75B annual gift waste through meaningful, targeted giving and re-gifting
+
+**Unique Value Drivers:**
+- Relationship intelligence > product recommendations
+- Proprietary context and data to help profile and refine individuals and what constitutes the best gifts for them. 
+- Complete experience orchestration (conversation → unboxing → impact)
+- Plan, anticipate and never miss deadlines for occasions
+
+### 👥 **Customer Segments**
+**Primary:** Relationship-conscious gift givers, ages 25-55
+- Urban/suburban professionals with disposable income
+- Active on social platforms (Instagram/WhatsApp)
+- Value relationships but time-constrained, mentally overloaded
+- Give 5+ gifts annually to family, friends and colleagues, $30-200 per gift
+- Care about being personal and thoughtful, creating a memorable moment and present for people they care about - easily. 
+
+**Possible Secondary Segments:**
+- Busy parents managing family gift obligations
+- Long-distance relationship maintainers
+- Corporate gift coordinators who want to stand out
+
+### 💰 **Revenue Streams**
+**Multi-layer Monetization:**
+1. **Transaction-based** 
+   - 5-10% commission on gift purchases
+   - Premium delivery fees ($15-50)
+   - Rush processing ($25+ for same-day)
+
+**Target Economics:** $50 ARPU, 40% gross margin, 18-month payback
+
+### 🏗 **Key Resources**
+**Data Assets (Primary Moat):**
+- Relationship intelligence database
+- Gift outcome history (success/failure patterns)
+- Cultural appropriateness knowledge base
+- User behavioral patterns and preferences
+
+**Technical Infrastructure:**
+- 5-database hybrid architecture (PostgreSQL, Neo4j, Vector DB, Redis, Event Store)
+- AI/ML pipeline (GPT-4.1, RAG, Vector search)
+- Multi-platform integrations (Meta, WhatsApp, payment processors)
+
+**Human Capital:**
+- AI/ML engineers with personalization expertise
+- Cultural consultants and relationship psychologists
+- Partnership managers for vendor relationships
+
+### 🤝 **Key Partnerships**
+**Technology Partners:**
+- OpenAI (GPT-4.1 API access and optimization)
+- Meta Business Platform (Instagram/Messenger integration)
+- Vector database providers (Pinecone/Weaviate)
+- Payment processors (Stripe, international)
+
+**Commerce Partners:**
+- Artisan marketplaces (Etsy, local craftspeople)
+- Sustainable brands (BCorp, eco-friendly products)
+- Experience providers (local activities, subscriptions)
+
+**Strategic Alliances:**
+- Wedding/event planning services
+- Corporate wellness programs
+
+
+### 🎯 **Customer Relationships**
+**Relationship Type:** Personal AI Assistant (high intimacy, high frequency)
+
+**Acquisition Strategy:**
+- Organic viral growth through gift recipient experience
+- Social proof through gift success stories
+- Instagram/TikTok content marketing
+- Influencer partnerships with lifestyle content creators
+
+**Retention Mechanisms:**
+- Relationship memory system (switching cost)
+- Occasion calendar with proactive reminders
+- Continuous learning improvement (gets better over time)
+- Social features (gift inspiration sharing)
+
+### 📱 **Channels**
+**Primary Distribution:**
+- Native messaging platform integrations (Instagram DM, WhatsApp)
+- Progressive web app for complex interactions
+- API integrations for third-party services
+
+**Marketing Channels:**
+- Social media advertising (Instagram, TikTok)
+- Content marketing (relationship tips, gift guides)
+- Referral program (both giver and recipient incentives)
+- Partnership integrations (calendar apps, social platforms)
+
+### 💡 **Key Activities**
+**Product Development:**
+- AI model training and optimization
+- Cultural intelligence database expansion
+- User experience refinement
+- Platform integration development
+
+**Operations:**
+- Vendor relationship management
+- Quality assurance and cultural sensitivity review
+- Customer support and relationship coaching
+- Data analysis and pattern recognition
+
+**Marketing & Growth:**
+- Content creation and social media presence
+- Partnership development and management
+- User onboarding and retention optimization
+- Brand building and thought leadership
+
+### 💸 **Cost Structure**
+**Technology Costs (40% of expenses):**
+- AI/ML infrastructure and API costs (OpenAI, vector search)
+- Database hosting and scaling (Neo4j, PostgreSQL, Redis)
+- Development and engineering salaries
+
+**Operations Costs (35% of expenses):**
+- Payment processing fees
+- Customer acquisition costs
+- Vendor relationship management
+- Quality assurance and content moderation
+
+**Overhead (25% of expenses):**
+- General administrative expenses
+- Legal and compliance
+- Office and remote work infrastructure
+- Insurance and business services
+
+### 🎯 **Success Metrics**
+**Market Validation:**
+- Product-Market Fit: NPS >50, >70% find recommendations better than alternatives
+- Viral Coefficient: >0.5 (each user brings 0.5 new users through gifts)
+- Network Effects: Recommendation accuracy improves measurably with user base
+
+**Business Viability:**
+- Unit Economics: CAC/LTV <0.3, 18-month payback
+- Revenue Growth: Path to $10K MRR in 6 months, $1M ARR in 2 years
+- Market Penetration: 100K users by year 2, 1M by year 5
+
+---
 ## 8. Prototype & Learning Plan
 
 ### Week 1: Wizard of Oz Testing
