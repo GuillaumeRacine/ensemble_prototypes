@@ -25,7 +25,7 @@
 - [Validation Experiments](#validation-experiments)
 
 ### [4. Implementation Roadmap](#4-implementation-roadmap)
-- [16-Day Coding Plan](#16-day-coding-plan)
+- [Implementation Steps](#implementation-steps)
 - [Phase-by-Phase Breakdown](#phase-by-phase-breakdown)
 - [Success Criteria & Kill Criteria](#success-criteria--kill-criteria)
 
@@ -37,7 +37,7 @@
 
 ### [6. Simplified MVP Approach](#6-simplified-mvp-approach)
 - [Minimal Viable Product](#minimal-viable-product)
-- [Week-by-Week Testing](#week-by-week-testing)
+- [Progressive Testing](#progressive-testing)
 - [Cost Model](#cost-model)
 
 ### [7. Technical Specification](#7-technical-specification)
@@ -66,13 +66,13 @@ Present Agent transforms gift-giving from stressful obligation to joyful relatio
 
 ### Business Viability
 - **Unit Economics**: CAC/LTV <0.3, 18-month payback
-- **Revenue Growth**: Path to $10K MRR in 6 months, $1M ARR in 2 years
+- **Revenue Growth**: Path to $10K MRR, then $1M ARR scale
 - **Market Penetration**: 100K users by year 2, 1M by year 5
 
 ## Target Economics
 - **ARPU**: $50 with 40% gross margin
 - **Payback**: 18-month customer acquisition cost recovery
-- **Scale**: Path to $10K MRR in 6 months, $1M ARR in 2 years
+- **Scale**: Path to $10K MRR, then $1M ARR potential
 
 ---
 
@@ -262,13 +262,13 @@ Transform gift-giving from stressful obligation to joyful relationship investmen
 **Pass/Fail Experiment**:
 - **Test**: Time to satisfaction + return rate after feedback incorporation
 - **Metric**: Time to "I love this!" moment + 7-day return rate
-- **Pass**: <2 min to satisfaction AND >40% return within 7 days
+- **Pass**: <2 min to satisfaction AND >40% return rate
 - **Fail**: >3 minutes OR <20% return rate
-- **Sample Size**: 100 users tracked over 2 weeks
+- **Sample Size**: 100 users tracked for sufficient data
 
 ## MVP Feature Scope
 
-### MUST HAVE (Week 1-2)
+### MUST HAVE (Phase 1)
 ```python
 features = {
     "conversation_engine": {
@@ -294,7 +294,7 @@ features = {
 }
 ```
 
-### NICE TO HAVE (Week 3-4)
+### NICE TO HAVE (Phase 2)
 - Voice input (test if easier than typing)
 - Multiple platforms (start with one)
 - Purchase integration (just track intent for now)
@@ -310,7 +310,7 @@ features = {
 
 ## Validation Experiments
 
-### Experiment 1: Baseline Quality Test (Week 1)
+### Experiment 1: Baseline Quality Test (Phase 1)
 **Setup**: 
 ```python
 def quality_test():
@@ -331,7 +331,7 @@ def quality_test():
 
 **Success Criteria**: Hybrid wins >70% of blind tests
 
-### Experiment 2: Memory Value Test (Week 2)
+### Experiment 2: Memory Value Test (Phase 2)
 **Setup**:
 ```python
 def memory_value_test():
@@ -351,7 +351,7 @@ def memory_value_test():
 
 **Success Criteria**: >30% improvement by session 5
 
-### Experiment 3: Conversation Depth Test (Week 1)
+### Experiment 3: Conversation Depth Test (Phase 1)
 **Setup**:
 ```python
 def conversation_depth_test():
@@ -377,7 +377,7 @@ def conversation_depth_test():
 
 **Success Criteria**: Chat collects >3x more useful data points
 
-### Experiment 4: Speed & Return Test (Week 2-3)
+### Experiment 4: Speed & Return Test (Phase 2)
 **Setup**:
 ```python
 def speed_and_retention_test():
@@ -412,11 +412,11 @@ def speed_and_retention_test():
 
 # 4. Implementation Roadmap
 
-## 16-Day Coding Plan
+## Implementation Steps
 
 ### Phase 1: Foundation Infrastructure (Days 1-3)
 
-#### Day 1-2: Project Setup
+#### Step 1: Project Setup
 ```bash
 # Terminal commands to run
 mkdir present_agent_mvp && cd present_agent_mvp
@@ -454,7 +454,7 @@ class Settings(BaseSettings):
 settings = Settings()
 ```
 
-#### Day 3: Database Models
+#### Step 2: Database Models
 ```python
 # app/db/models.py - Core data models
 from sqlalchemy import Column, String, JSON, DateTime, Float, Integer
@@ -495,7 +495,7 @@ class Recipient(Base):
 
 ### Phase 2: Conversation Engine (Days 4-6)
 
-#### Day 4: Basic Chat Flow
+#### Step 3: Basic Chat Flow
 ```python
 # app/services/conversation.py
 from openai import OpenAI
@@ -550,7 +550,7 @@ class ConversationEngine:
         return json.loads(response.choices[0].message.content)
 ```
 
-#### Day 5: Natural Question Generation
+#### Step 4: Natural Question Generation
 ```python
 # app/services/conversation.py (continued)
 def generate_clarifying_question(self, missing_field: str) -> str:
@@ -580,7 +580,7 @@ def generate_clarifying_question(self, missing_field: str) -> str:
     return response.choices[0].message.content
 ```
 
-#### Day 6: Context Validation
+#### Step 5: Context Validation
 ```python
 # app/services/validator.py
 class ContextValidator:
@@ -602,7 +602,7 @@ class ContextValidator:
 
 ### Phase 3: Product Catalog & Hybrid Recommendation (Days 7-9)
 
-#### Day 7: Product Catalog Setup
+#### Step 6: Product Catalog Setup
 ```python
 # app/services/catalog.py
 import pandas as pd
@@ -637,7 +637,7 @@ class ProductCatalog:
         return results.head(50).to_dict('records')
 ```
 
-#### Day 8: Hybrid Recommender
+#### Step 7: Hybrid Recommender
 ```python
 # app/services/recommender.py
 from typing import List, Dict
@@ -673,7 +673,7 @@ class HybridRecommender:
         return self.add_explanations(top_3, context)
 ```
 
-#### Day 9: Explanation Generation
+#### Step 8: Explanation Generation
 ```python
 # app/services/recommender.py (continued)
 def add_explanations(self, products: List[Dict], context: Dict) -> List[Dict]:
@@ -713,7 +713,7 @@ def add_explanations(self, products: List[Dict], context: Dict) -> List[Dict]:
 
 ### Phase 4: Memory System (Days 10-12)
 
-#### Day 10: User Memory Storage
+#### Step 9: User Memory Storage
 ```python
 # app/services/memory.py
 from typing import Dict, List
@@ -739,7 +739,7 @@ class MemorySystem:
         self.db.commit()
 ```
 
-#### Day 11: Learning from Feedback
+#### Step 10: Learning from Feedback
 ```python
 # app/services/memory.py (continued)
 def learn_from_feedback(self, session_id: str, feedback: Dict):
@@ -764,7 +764,7 @@ def learn_from_feedback(self, session_id: str, feedback: Dict):
     self.db.commit()
 ```
 
-#### Day 12: Memory-Enhanced Recommendations
+#### Step 11: Memory-Enhanced Recommendations
 ```python
 # app/services/recommender.py (updated)
 def apply_user_preferences(self, products: List[Dict], user_memory: Dict) -> List[Dict]:
@@ -793,7 +793,7 @@ def apply_user_preferences(self, products: List[Dict], user_memory: Dict) -> Lis
 
 ### Phase 5: Experiment Framework (Days 13-14)
 
-#### Day 13: A/B Testing Setup
+#### Step 12: A/B Testing Setup
 ```python
 # app/experiments/ab_test.py
 import random
@@ -826,7 +826,7 @@ class ExperimentFramework:
         return self.assignments[key]
 ```
 
-#### Day 14: Assumption Validation Tests
+#### Step 13: Assumption Validation Tests
 ```python
 # app/experiments/validators.py
 from scipy import stats
@@ -858,7 +858,7 @@ class AssumptionValidator:
 
 ### Phase 6: API & Testing Interface (Days 15-16)
 
-#### Day 15: REST API
+#### Step 14: REST API
 ```python
 # app/api/chat.py
 from fastapi import APIRouter, HTTPException
@@ -926,7 +926,7 @@ async def chat(request: ChatRequest):
     )
 ```
 
-#### Day 16: Launch & Monitoring
+#### Step 15: Launch & Monitoring
 ```python
 # app/monitoring.py
 from datetime import datetime, timedelta
@@ -948,12 +948,12 @@ class MetricsDashboard:
 
 ## Success Criteria & Kill Criteria
 
-### Week 2 Checkpoint
+### Phase 1 Checkpoint
 - [ ] Assumption 1: Hybrid quality test complete with 100+ tests
 - [ ] Assumption 3: Conversation depth measured with 200+ users
 - [ ] **Decision**: Continue if 2/2 assumptions validated
 
-### Week 4 Final Decision  
+### Phase 2 Final Decision  
 - [ ] All 4 assumptions tested with statistical significance
 - [ ] **GO if**: 3/4 assumptions clearly validated
 - [ ] **PIVOT if**: 2/4 assumptions validated (adjust approach)
@@ -1340,7 +1340,7 @@ class VectorEmbeddingModel:
 
 ### The Absolute Minimum Product
 
-#### What We Ship (Week 1)
+#### What We Ship (Initial Release)
 - **One Channel**: Instagram DM only
 - **One Flow**: Text-based conversation
 - **One Database**: PostgreSQL only (no complex architecture yet)
@@ -1372,9 +1372,9 @@ Bot: "Based on what you shared... [3 recommendations with WHY they match]"
 - Heroku (free tier)
 ```
 
-## Week-by-Week Testing
+## Progressive Testing
 
-### Week 0: Manual Testing (No Code)
+### Phase 0: Manual Testing (No Code)
 **Build**: Nothing - use your personal Instagram to manually chat with 10 friends
 **Test**: Will people share relationship details via DM?
 **Measure**: 
@@ -1385,7 +1385,7 @@ Bot: "Based on what you shared... [3 recommendations with WHY they match]"
 - ✅ Continue if >50% share meaningful details
 - ❌ Kill if people refuse to engage
 
-### Week 1: Wizard of Oz (Minimal Code)
+### Phase 1: Wizard of Oz (Minimal Code)
 **Build**: 
 - Instagram webhook receiver (50 lines)
 - Human-powered responses with templates
@@ -1401,7 +1401,7 @@ Bot: "Based on what you shared... [3 recommendations with WHY they match]"
 - ✅ Continue if satisfaction >3.5/5
 - ❌ Pivot if we can't find good gifts manually
 
-### Week 2: Basic AI Integration
+### Phase 2: Basic AI Integration
 **Build**:
 - GPT-4-turbo integration (100 lines)
 - Relationship extraction prompt
@@ -1444,7 +1444,7 @@ Format: JSON with gift, reason, where_to_buy
 
 ### Assumptions to Validate
 - Conversations average 5-7 messages
-- 30% return within 30 days
+- 30% return rate
 - 20% show purchase intent
 - 10% actually purchase (generating commission)
 
@@ -1471,7 +1471,7 @@ A lightweight AI chatbot that starts simple - learning about one user and helpin
 
 ### MVP Scope - Weekly Iterations
 
-#### Week 1: Basic Chat Interface ✅
+#### Phase 1: Basic Chat Interface ✅
 **Ship:** Working chatbot that responds on ONE platform (Instagram DM)
 **Features:**
 - Basic greeting and introduction
@@ -1489,7 +1489,7 @@ A lightweight AI chatbot that starts simple - learning about one user and helpin
   └── templates.py       # Response templates
 ```
 
-#### Week 2: AI-Powered Recommendations 🤖
+#### Phase 2: AI-Powered Recommendations 🤖
 **Ship:** GPT-4 integration for personalized suggestions
 **Features:**
 - Ask about recipient (who, occasion, interests)
