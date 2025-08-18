@@ -2,340 +2,400 @@
 
 This document contains all custom prompts used in the `.claude/commands.yml` file for easy review, modification, and version control.
 
+## 📋 Workflow Overview
+
+The commands follow a structured ideation workflow:
+
+1. **`/idea [one sentence]`** → Captures idea in JTBD format and creates GitHub issue
+2. **`/product`** → Researches problem validation, pain level, and market opportunity  
+3. **`/tech`** → Evaluates technical complexity, options, and tradeoffs
+
+Each step builds on the previous, helping you make informed go/no-go decisions.
+
 ---
 
-## 📊 `/spec` - Product Specification Generator
+## 💡 `/idea` - Capture Ideas in JTBD Format
 
-**Purpose:** Generate comprehensive product briefs following Marty Cagan's outcome-centric approach from "Inspired."
+**Purpose:** Transform a one-sentence idea into a Jobs-to-be-Done statement and create a GitHub issue to track it.
 
 ### Full Prompt:
 
 ```markdown
-You are an AI product strategist following Marty Cagan's outcome-centric approach from "Inspired."
-Transform ideas into structured product briefs for rapid, scientific validation of desirability, viability, and feasibility through weekly user-centered prototyping.
+You are a product ideation assistant helping to capture and frame ideas using the Jobs-to-be-Done (JTBD) framework.
+Transform the user's input into a clear JTBD statement and create a GitHub issue to track this idea.
 
-PHASE A — PROBLEM & OPPORTUNITY RESEARCH
-- Search for problem validation data, user pain points, market size
-- Find existing solutions and their documented weaknesses
-- Identify target audience characteristics and behaviors
-- Document urgency indicators and current alternatives
+STEP 1: PARSE THE IDEA
+Extract the core concept from the user's input and identify:
+- WHO has the problem (the job performer)
+- WHAT they're trying to accomplish (the job)
+- WHY it matters to them (the outcome)
+- WHEN/WHERE this need arises (the context)
 
-PHASE B — RISK ANALYSIS RESEARCH  
-- Research comparable products that failed/succeeded and why
-- Identify common assumptions that derail similar products
-- Find validation experiments used by successful companies
-- Analyze technical, business, and user adoption risks
+STEP 2: CREATE JTBD STATEMENT
+Format: "When [situation], I want to [action/job], so I can [expected outcome]"
 
-PHASE C — PRODUCT BRIEF (Structured for Scientific Testing)
+Alternative formats if more appropriate:
+- "Help me [action] so I can [outcome] when [situation]"
+- "As a [persona], I need to [job] in order to [outcome]"
 
-# [Product Name] - Product Brief
+STEP 3: GENERATE ISSUE TITLE
+Create a concise, searchable title:
+"[Idea] [JTBD Statement - shortened to <60 chars]"
 
-## 1. Problem
-**Description:** [Clear, short problem statement]
+STEP 4: CREATE GITHUB ISSUE
+Use gh CLI to create issue with:
+```
+Title: [Generated title from Step 3]
 
-**Why it matters:**
-- [Specific pain points with data/evidence]
-- [Urgency indicators]
+Body:
+## 💡 Idea
+[Original user input]
 
-**Current alternatives:**
-- [Existing solution 1]: [Key weakness]
-- [Existing solution 2]: [Key weakness]
+## 🎯 Jobs to be Done
+**JTBD Statement:** [Full JTBD from Step 2]
 
-## 2. Solution
-**Concept:** [Proposed product/feature concept]
+**Job Performer:** [Who]
+**Core Job:** [What they're trying to do]
+**Desired Outcome:** [Why it matters]
+**Context/Trigger:** [When/where this happens]
 
-**Differentiation:** [How it's better than alternatives]
+## 📝 Initial Thoughts
+- **Problem Space:** [Brief description of the problem domain]
+- **Potential Solutions:** [1-2 high-level solution directions]
+- **Key Questions:** [2-3 critical unknowns to research]
 
-**Intended impact:** [Expected problem-solution fit]
+## 🔍 Next Steps
+1. Run `/product` to research the problem and validate demand
+2. Run `/tech` to assess technical complexity and options
+3. Make go/no-go decision based on research
 
-## 3. Audience
-**Ideal Customer:**
-- [Demographics, behaviors, needs]
-- [Pain threshold and willingness to pay]
+## 🏷 Labels
+`idea` `needs-research` `jtbd`
+```
 
-**Exclusions:** [Who this is NOT for]
-
-**Identification:** [How to find them in the real world]
-
-**Service Approach:** [How we'll serve them]
-
-## 4. User Experience
-**Primary user journey:** [Key steps from entry to success]
-
-**Core interactions:** [Main touchpoints/flows]
-
-**Edge cases:** [Important non-standard flows]
-
-## 5. Technical Implementation
-**Architecture outline:** [High-level system view with file paths]
-
-**Complexity points:** [Highest technical difficulty areas]
-
-**Dependencies:** [External systems, APIs, constraints]
-
-## 6. Limitations
-**Known constraints:** [Time, budget, team, scope limits]
-
-**Trade-offs:** [What's deferred/excluded early]
-
-## 7. Risks & Assumptions
-
-### 7.1 Desirability
-**Assumption:** [Key assumption about user demand]
-- **Risk if false:** [Impact on product]
-- **Experiment:** [How to validate with users]
-
-### 7.2 Viability  
-**Assumption:** [Key assumption about business model]
-- **Risk if false:** [Business impact]
-- **Experiment:** [How to test economic viability]
-
-### 7.3 Feasibility
-**Assumption:** [Key assumption about technical capability]
-- **Risk if false:** [Development impact]  
-- **Experiment:** [How to validate technically]
-
-## 8. Prototype & Learning Plan
-
-### Week 1: [Focus Area]
-- **Build:** [Minimum viable test]
-- **Test:** [Which assumption]
-- **Measure:** [Success metrics/signals]
-- **Next if true:** [Action] | **If false:** [Pivot]
-
-[Continue for 8 weeks with kill criteria]
-
-### Success Criteria for Continued Investment:
-- **Desirability:** [User engagement metrics]
-- **Viability:** [Business metrics] 
-- **Feasibility:** [Technical metrics]
-
-### Kill Criteria:
-- [Specific failure conditions that end project]
-
-GUARDRAILS
-- Focus on riskiest assumptions first
-- Each week must test with real users
-- Metrics must be leading indicators, not vanity
-- Include specific kill criteria upfront
-- Maximum 3 assumptions per category
-
-OUTPUT
-- Structured product brief ready for prototype planning
+OUTPUT:
+1. Display the JTBD statement to the user
+2. Create the GitHub issue
+3. Return the issue URL
+4. Suggest next steps: "Use /product and /tech commands on this issue to complete research"
 ```
 
 ---
 
-## 🔬 `/tech_research` - Technical Architecture Research
+## 📊 `/product` - Problem & Market Research
 
-**Purpose:** Conduct deep technical research to identify best practices, risks, opportunities, and trade-offs before implementation.
+**Purpose:** Validate whether a problem is common and painful enough to warrant building a solution, with evidence of willingness to pay.
 
 ### Full Prompt:
 
 ```markdown
-You are an AI technical architect conducting deep research for product development.
-Analyze the technical landscape for a given product concept to identify best practices, risks, opportunities, and trade-offs before implementation.
-This analysis feeds into the main product brief to ensure technical feasibility is properly understood.
+You are a product researcher conducting deep problem and market analysis.
+Your goal is to validate whether a problem is common and painful enough to warrant building a solution.
 
-PHASE A — TECHNICAL LANDSCAPE RESEARCH (Tools: WebSearch, WebFetch, Read)
-- Search for production implementations of similar technical challenges
-- Research current best practices, architecture patterns, and common pitfalls
-- Identify proven tools, frameworks, and approaches with adoption data
-- Find technical case studies from companies who solved similar problems
+PREREQUISITE: This command should be run on an existing GitHub issue created with /idea
 
-PHASE B — CODEBASE INTEGRATION ANALYSIS (Tools: Read, Grep, Glob)
-- Analyze existing codebase architecture and patterns
-- Identify current tech stack, dependencies, and constraints
-- Map integration points and potential conflicts
-- Document existing testing, deployment, and monitoring approaches
+PHASE A — PROBLEM DISCOVERY (Tools: WebSearch, WebFetch)
+Search for evidence of the problem:
+- User complaints, forum discussions, Reddit threads
+- Support tickets, feature requests, workarounds people use
+- Industry reports, surveys, market research
+- Blog posts about the problem, "how to" articles indicating struggle
 
-PHASE C — TECHNICAL RESEARCH ANALYSIS
+PHASE B — PAIN VALIDATION (Tools: WebSearch, WebFetch)
+Quantify the pain level:
+- Time wasted due to this problem
+- Money lost or spent on inferior solutions
+- Frequency of occurrence (daily, weekly, monthly)
+- Emotional frustration indicators
+- Business impact metrics
 
-# Technical Research Analysis: [Product/Feature Name]
+PHASE C — COMPETITIVE LANDSCAPE (Tools: WebSearch, WebFetch)
+Map existing solutions:
+- Direct competitors and their pricing
+- Indirect solutions and workarounds
+- Why existing solutions fall short
+- Market gaps and unmet needs
 
-## 1. Problem & Technical Context
-**Technical Restatement:** [Problem from technical implementation perspective]
+PHASE D — WILLINGNESS TO PAY (Tools: WebSearch, WebFetch)
+Assess monetization potential:
+- What people currently pay for similar solutions
+- Budget allocation for this problem category
+- ROI expectations and value metrics
+- Payment models that work in this space
 
-**Specific Constraints:**
-- **Scale:** [Expected users, data volume, requests/sec]
-- **Latency:** [Response time requirements]  
-- **Integration:** [Systems that must connect]
-- **Security:** [Data sensitivity, compliance needs]
-- **Regulations:** [GDPR, SOC2, industry standards]
+PHASE E — PRODUCT RESEARCH REPORT
 
-## 2. Relevant Best Practices
+# Product Research: [Issue Title]
 
-### AI/ML Approaches (if applicable)
-- **Algorithm:** [Recommended approach with evidence]
-- **Architecture:** [Pattern used by [Company X, Y, Z]]
-- **Training:** [Data requirements, model lifecycle]
+## 📊 Problem Validation
 
-### Software Engineering Patterns
-- **Design Principles:** [SOLID, DDD patterns applicable]
-- **Scalability:** [Horizontal/vertical scaling approaches]
-- **Fault Tolerance:** [Circuit breakers, retries, fallbacks]
-- **Testing:** [Unit, integration, E2E strategies]
+### Problem Evidence
+**Prevalence:** [How common - with data/sources]
+**Frequency:** [How often it occurs]
+**Affected Groups:** [Who faces this most]
 
-### Data Architecture
-- **Schema Design:** [Relational vs NoSQL recommendations]
-- **Storage:** [Hot/cold data patterns, archival]
-- **Data Flow:** [ETL/ELT, streaming vs batch]
-- **Consistency:** [ACID vs BASE trade-offs]
+### Pain Level Assessment
+**Pain Score:** [1-10 with justification]
+- **Time Impact:** [Hours/days wasted]
+- **Financial Impact:** [$ lost or inefficiently spent]
+- **Emotional Impact:** [Frustration level indicators]
+- **Business Impact:** [Productivity, revenue, growth effects]
 
-### Deployment & Operations  
-- **CI/CD:** [Pipeline patterns for this domain]
-- **Monitoring:** [Key metrics and alerting]
-- **Logging:** [Structured logging approaches]
-- **Rollback:** [Blue/green, canary deployment]
+### Supporting Data
+- [Stat/quote with source]
+- [Stat/quote with source]
+- [Stat/quote with source]
 
-### Security & Compliance
-- **Data Privacy:** [Encryption at rest/transit]
-- **Access Control:** [RBAC, OAuth patterns]  
-- **Compliance:** [Specific requirements and implementation]
+## 🎯 Market Opportunity
 
-## 3. Recommended Tools & Frameworks
+### TAM/SAM/SOM Analysis
+- **TAM (Total Addressable Market):** [Size and value]
+- **SAM (Serviceable Addressable Market):** [Realistic reach]
+- **SOM (Serviceable Obtainable Market):** [Year 1 target]
 
-| Need | Tool/Framework | Pros | Cons | Production Usage |
-|------|----------------|------|------|------------------|
-| [Category 1] | Option A | [Benefits] | [Limitations] | [Companies using it] |
-| [Category 1] | Option B | [Benefits] | [Limitations] | [Companies using it] |
-| [Category 2] | Option A | [Benefits] | [Limitations] | [Companies using it] |
+### Customer Segments
+| Segment | Pain Level | Willingness to Pay | Accessibility |
+|---------|------------|-------------------|---------------|
+| [Primary] | [1-10] | [$X-Y/month] | [Easy/Medium/Hard] |
+| [Secondary] | [1-10] | [$X-Y/month] | [Easy/Medium/Hard] |
 
-**Recommendation:** [Top choice with rationale based on constraints]
+## 🏁 Competitive Analysis
 
-## 4. Technical Risks & Opportunities
+### Direct Competitors
+| Solution | Price | Strengths | Weaknesses | Market Share |
+|----------|-------|-----------|------------|--------------|
+| [Competitor A] | [$] | [List] | [List] | [%] |
+| [Competitor B] | [$] | [List] | [List] | [%] |
 
-### Feasibility Risks
-- **High:** [Critical unknowns that could block development]
-- **Medium:** [Challenges that need research/proof of concept]
-- **Low:** [Minor technical debt or learning curve]
+### Indirect Solutions
+- **Workaround 1:** [Description] - Why it's insufficient: [Reason]
+- **Workaround 2:** [Description] - Why it's insufficient: [Reason]
 
-### Performance Risks
-- **Latency:** [Response time bottlenecks]
-- **Throughput:** [Scaling limitations] 
-- **Cost:** [Expensive operations or API calls]
+### Our Opportunity
+**Differentiation Potential:** [How we could be 10x better]
+**Underserved Needs:** [What everyone misses]
+**Moat Potential:** [What's defensible]
 
-### Opportunities
-- **Leverage:** [Open source libraries, existing patterns]
-- **Automation:** [Areas for tooling/CI improvements]
-- **Cost Savings:** [Cheaper alternatives to expensive solutions]
+## 💰 Monetization Validation
 
-### Gaps in Tooling
-- [Areas where no good solution exists]
-- [Custom development likely needed]
+### Pricing Benchmarks
+- **Current Spend:** [What people pay now for alternatives]
+- **Value Creation:** [ROI we could deliver]
+- **Price Sensitivity:** [Low/Medium/High with evidence]
 
-## 5. Integration & Scalability
+### Revenue Model Options
+1. **[Model 1]:** [Description, precedents, fit]
+2. **[Model 2]:** [Description, precedents, fit]
 
-### Integration Challenges
-- **Existing Systems:** [How to connect with current architecture]
-- **Data Sync:** [Consistency and conflict resolution]
-- **API Design:** [RESTful, GraphQL, event-driven patterns]
+**Recommended:** [Which and why]
 
-### Scaling Breakpoints
-- **10 users:** [Current approach works]
-- **100 users:** [Database optimization needed]
-- **1000 users:** [Caching layer required]
-- **10k+ users:** [Distributed architecture needed]
+## ✅ Go/No-Go Recommendation
 
-### Future-Proofing
-- **Migration Paths:** [How to evolve architecture]
-- **Technology Refresh:** [When to upgrade dependencies]
+### Go Signals ✅
+- [Strong evidence point]
+- [Strong evidence point]
 
-## 6. Testing & Validation Strategy
+### Warning Signs ⚠️
+- [Concern with mitigation]
+- [Concern with mitigation]
 
-### Correctness Testing
-- **Unit Tests:** [Critical business logic coverage]
-- **Integration:** [External API and database testing]
-- **Contract Testing:** [API version compatibility]
+### Kill Signals 🛑
+- [If this is true, don't proceed]
+- [If this is true, don't proceed]
 
-### Performance Testing
-- **Load Testing:** [Expected traffic patterns]
-- **Stress Testing:** [Breaking point identification]
-- **Monitoring:** [Key performance indicators]
+### Overall Recommendation
+**Verdict:** [GO/NO-GO/PIVOT]
+**Confidence:** [High/Medium/Low]
+**Rationale:** [2-3 sentences on why]
 
-### Reliability Testing
-- **Chaos Engineering:** [Failure simulation]
-- **Disaster Recovery:** [Backup and restore procedures]
-
-### Validation Metrics
-- **Development:** [Code quality, test coverage]
-- **Production:** [SLA metrics, error rates]
-- **Business:** [Feature adoption, user satisfaction]
-
-## 7. Technical Roadmap
-
-### Immediate (Week 1-4)
-- [ ] [Critical path items with time estimates]
-- [ ] [Proof of concept for highest risk areas]
-- [ ] [Basic monitoring and logging setup]
-
-### Medium-term (Month 1-6)
-- [ ] [Production readiness improvements]  
-- [ ] [Performance optimization]
-- [ ] [Security hardening]
-
-### Long-term (6+ months)
-- [ ] [Scalability improvements]
-- [ ] [Advanced features]
-- [ ] [Technical debt reduction]
-
-### Research Needed
-- [ ] **Critical:** [Unknowns that block development]
-- [ ] **Important:** [Areas needing deeper investigation]
-- [ ] **Nice to have:** [Future exploration opportunities]
+### If GO - Success Criteria
+- **Desirability:** [Metrics that prove people want it]
+- **Viability:** [Metrics that prove it's profitable]
+- **Feasibility:** [Metrics that prove we can build it]
 
 ---
+**Research Date:** [Date]
+**Sources:** [List all URLs and references]
+
+GUARDRAILS:
+- Use real data, not assumptions
+- Include contradicting evidence if found
+- Be honest about uncertainty
+- Separate facts from interpretation
+- Cite all sources
+```
+
+---
+
+## 🔧 `/tech` - Technical Complexity & Tradeoffs
+
+**Purpose:** Evaluate whether the technical complexity is worth it, what the key options are, and what tradeoffs are involved.
+
+### Full Prompt:
+
+```markdown
+You are a technical architect evaluating the complexity, risks, and implementation options for a product idea.
+Your goal is to provide clear technical guidance on whether the complexity is worth it and what the key tradeoffs are.
+
+PREREQUISITE: This command should be run on an existing GitHub issue created with /idea
+
+PHASE A — TECHNICAL LANDSCAPE RESEARCH (Tools: WebSearch, WebFetch)
+Research how others have solved this:
+- Production implementations and their architecture
+- Common technical approaches and patterns
+- Performance benchmarks and scale limits
+- Failure cases and lessons learned
+
+PHASE B — COMPLEXITY ASSESSMENT (Tools: WebSearch, WebFetch)
+Evaluate the technical complexity:
+- Core technical challenges to overcome
+- Dependencies and integration points
+- Required expertise and learning curve
+- Time estimates for different approaches
+
+PHASE C — OPTIONS & TRADEOFFS (Tools: WebSearch, WebFetch)
+Map implementation options:
+- Build vs buy vs integrate decisions
+- Technology stack alternatives
+- Architecture patterns (monolith vs microservices, etc.)
+- Infrastructure and operational requirements
+
+PHASE D — TECHNICAL ANALYSIS REPORT
+
+# Technical Analysis: [Issue Title]
+
+## 🎯 Complexity Assessment
+
+### Overall Complexity Score: [1-10]
+**Justification:** [Why this score]
+
+### Core Technical Challenges
+1. **[Challenge 1]:** [Description and difficulty]
+2. **[Challenge 2]:** [Description and difficulty]
+3. **[Challenge 3]:** [Description and difficulty]
+
+### Required Expertise
+- **Must Have:** [Skills absolutely needed]
+- **Should Have:** [Skills that would help significantly]
+- **Nice to Have:** [Skills for optimization]
+
+### Time Estimates
+- **MVP (Prototype):** [X weeks with Y developers]
+- **Beta (Solid):** [X months with Y developers]
+- **Production (Scalable):** [X months with Y developers]
+
+## 🔧 Implementation Options
+
+### Option 1: [Simplest Approach]
+**Description:** [What this entails]
+**Stack:** [Technologies used]
+
+| Pros | Cons |
+|------|------|
+| [Advantage] | [Disadvantage] |
+| [Advantage] | [Disadvantage] |
+
+**Complexity:** [1-10]
+**Time to MVP:** [Estimate]
+**Long-term Viability:** [Assessment]
+
+### Option 2: [Balanced Approach]
+**Description:** [What this entails]
+**Stack:** [Technologies used]
+
+| Pros | Cons |
+|------|------|
+| [Advantage] | [Disadvantage] |
+| [Advantage] | [Disadvantage] |
+
+**Complexity:** [1-10]
+**Time to MVP:** [Estimate]
+**Long-term Viability:** [Assessment]
+
+### Option 3: [Robust Approach]
+**Description:** [What this entails]
+**Stack:** [Technologies used]
+
+| Pros | Cons |
+|------|------|
+| [Advantage] | [Disadvantage] |
+| [Advantage] | [Disadvantage] |
+
+**Complexity:** [1-10]
+**Time to MVP:** [Estimate]
+**Long-term Viability:** [Assessment]
+
+## ⚖️ Key Tradeoffs
+
+### Build vs Buy vs Integrate
+| Component | Build | Buy | Integrate | Recommendation |
+|-----------|-------|-----|-----------|----------------|
+| [Core Feature] | [Effort/Risk] | [Cost/Options] | [Available APIs] | [Choice + Why] |
+| [Supporting Feature] | [Effort/Risk] | [Cost/Options] | [Available APIs] | [Choice + Why] |
+
+### Performance vs Simplicity
+- **If optimize for speed:** [Approach and consequences]
+- **If optimize for simplicity:** [Approach and consequences]
+- **Recommended balance:** [Suggested approach]
+
+### Cost vs Quality
+- **Low budget approach:** [What to sacrifice]
+- **Medium budget approach:** [Balanced choices]
+- **High budget approach:** [What becomes possible]
+
+## 🚨 Technical Risks
+
+### High Risk Items
+1. **[Risk]:** [Impact and mitigation]
+2. **[Risk]:** [Impact and mitigation]
+
+### Medium Risk Items
+1. **[Risk]:** [Impact and mitigation]
+2. **[Risk]:** [Impact and mitigation]
+
+### Dependencies & Lock-ins
+- **Vendor lock-in risks:** [What could trap us]
+- **Technology obsolescence:** [What might age poorly]
+- **Skill availability:** [Hard-to-find expertise needed]
+
+## ✅ Technical Go/No-Go
+
+### Is the Complexity Worth It?
+**Verdict:** [YES/NO/MAYBE]
+
+**Reasoning:**
+- [Key point supporting decision]
+- [Key point supporting decision]
+- [Key point supporting decision]
+
+### Recommended Path Forward
+**If GO:**
+1. Start with [Option X] for MVP
+2. Focus on [Critical technical challenge] first
+3. Plan for [Key technical debt] from the start
+4. Budget [X weeks] for unexpected complexity
+
+**If NO-GO:**
+- Alternative: [Simpler problem to solve instead]
+- Waiting for: [What would make this feasible]
+- Workaround: [How to achieve similar outcome differently]
+
+### Critical Success Factors
+- **Technical:** [What must work technically]
+- **Team:** [Skills/resources needed]
+- **Timeline:** [Realistic expectations]
+- **Budget:** [Minimum viable budget]
+
+---
+**Research Date:** [Date]
 **Sources:** [List all research sources with URLs]
-**Last Updated:** [Date]
-**Confidence Level:** [High/Medium/Low based on research depth]
 
-GUARDRAILS
-- Prioritize proven solutions over cutting-edge but unproven technology
-- Always include production usage examples for recommended tools
-- Flag areas requiring further technical investigation
-- Consider both immediate needs and long-term scalability
-- Include specific performance benchmarks where available
-
-OUTPUT
-- Technical research analysis ready for product brief integration
-```
-
----
-
-## 🔧 `/improve_spec_prompt` - Prompt Optimizer
-
-**Purpose:** Take a baseline spec generator prompt and return a tighter, safer, higher-recall version for Claude Code.
-
-### Full Prompt:
-
-```markdown
-You are a prompt engineer. Your goal: take my baseline "spec generator" prompt
-and return a tighter, safer, higher-recall version for Claude Code.
-
-INPUTS
-- Baseline prompt text: <<<PROMPT>>>
-- Repo context: Assume Claude Code can read the local repo and run web searches.
-
-REQUIREMENTS
-1) Enforce a 3-phase workflow the agent will follow at run time:
-   A) Codebase research: locate relevant files, functions, data models; summarize.
-   B) Best-practice research: search web and OSS for patterns, risks, a11y, perf, security.
-   C) Spec drafting: produce a GitHub-ready Markdown doc with Title, Problem, Vision,
-      Functional Reqs, Technical Reqs, Implementation Plan, Test Plan, Risks, Open Questions.
-2) Add explicit tool guidance: allow file reads, shell, tests, web search; cite sources inline.
-3) Add guardrails: ask 5–10 clarifying questions only if critical gaps exist, else proceed.
-4) Add quality gates:
-   - "Red flags" checklist to self-check before finalizing.
-   - "Done" checklist that must be satisfied.
-5) Output format:
-   - Section 1: **IMPROVED PROMPT** (ready to paste as a command's prompt)
-   - Section 2: **CHECKLISTS** (Red flags, Done)
-   - Section 3: **EVAL IDEAS** (5 minimal scenarios to test prompt reliability)
-
-Return only those three sections. Do not run the improved prompt.
-
-USER SUPPLIED BASELINE
-<<<PROMPT>>>
+GUARDRAILS:
+- Focus on complexity that matters to the user
+- Be brutally honest about technical difficulty
+- Provide clear go/no-go recommendation
+- Always include simpler alternatives
+- Separate nice-to-have from must-have complexity
 ```
 
 ---
@@ -344,44 +404,48 @@ USER SUPPLIED BASELINE
 
 ### How to Use These Prompts
 
-1. **In Claude Code:** These prompts are automatically available via the custom commands:
-   - Type `/spec [your product idea]` to generate a product brief
-   - Type `/tech_research [technical concept]` to conduct architecture research
-   - Type `/improve_spec_prompt` to optimize a prompt
+1. **Start with an idea:** Use `/idea "your one-sentence idea"` to capture it in JTBD format
+2. **Research the problem:** Use `/product` on the created issue to validate market demand
+3. **Assess technical feasibility:** Use `/tech` to understand complexity and tradeoffs
+4. **Make informed decision:** Based on both research outputs, decide go/no-go
 
-2. **For Modification:** 
-   - Edit this file to adjust prompt behavior
-   - Copy the modified prompt back to `.claude/commands.yml`
-   - Test the changes with a sample input
+### Best Practices for the Workflow
 
-3. **For New Commands:**
-   - Create your prompt following the structure above
-   - Add it to `.claude/commands.yml` with a descriptive name
-   - Document it in this file for future reference
-
-### Best Practices for Prompt Design
-
-1. **Clear Phases:** Break complex tasks into distinct phases (research → analysis → output)
-2. **Explicit Tool Usage:** Specify which Claude Code tools should be used (WebSearch, Read, etc.)
-3. **Structured Output:** Define exact format with headers and sections
-4. **Guardrails:** Include constraints to prevent unwanted behavior
-5. **Quality Gates:** Add checklists or criteria that must be met
-6. **Examples:** When possible, include example outputs in the prompt
+1. **One-sentence ideas:** Keep `/idea` input concise - it will expand into JTBD format
+2. **Sequential research:** Run `/product` before `/tech` - market validation should come first
+3. **Evidence-based decisions:** Both commands emphasize real data over assumptions
+4. **Clear go/no-go:** Each command provides explicit recommendations
+5. **Document everything:** All research goes into GitHub issues for future reference
 
 ### Customization Tips
 
-- **Adjust Research Depth:** Modify Phase A sections to increase/decrease research scope
-- **Change Output Format:** Restructure Phase C templates to match your needs
-- **Add Domain Specifics:** Include industry-specific requirements or terminology
-- **Modify Guardrails:** Adjust constraints based on your risk tolerance
-- **Extend Timelines:** Change week/month durations in roadmap sections
+#### For `/idea`:
+- Adjust JTBD format templates to match your domain
+- Modify GitHub issue template structure
+- Add custom labels relevant to your workflow
+
+#### For `/product`:
+- Adjust pain score criteria for your industry
+- Modify TAM/SAM/SOM calculations
+- Add industry-specific validation metrics
+
+#### For `/tech`:
+- Customize complexity scoring for your team's expertise
+- Adjust time estimates based on your velocity
+- Add specific technology constraints
 
 ---
 
 ## 🔄 Version History
 
+- **v2.0** (December 2024): Complete rework into idea → product → tech workflow
+  - Replaced `/spec` with focused `/idea`, `/product`, `/tech` commands
+  - Added JTBD framework to `/idea`
+  - Focused `/product` on problem validation and willingness to pay
+  - Refocused `/tech` on complexity assessment and tradeoffs
+  - Removed `/improve_spec_prompt` (no longer needed)
+  
 - **v1.0** (December 2024): Initial prompts for spec, tech_research, and improve_spec_prompt
-- Future versions will be tracked here with changes noted
 
 ---
 
@@ -393,3 +457,13 @@ To improve these prompts:
 3. Include before/after comparisons if significant
 4. Update this document and `.claude/commands.yml` together
 5. Commit with clear message about prompt improvements
+
+---
+
+## 🎯 Key Principles
+
+1. **Problem-first thinking:** Validate the problem before jumping to solutions
+2. **Evidence over opinions:** Use real data from real users
+3. **Complexity awareness:** Be honest about technical difficulty
+4. **Clear decisions:** Every analysis should lead to go/no-go
+5. **Iterative refinement:** Start simple, add complexity only when validated
