@@ -207,16 +207,52 @@ This specification provides the product vision and assumptions to validate.
 
 ## Output to User (after posting comment)
 
+After posting the comment, display the FULL product brief in the terminal for user review:
+
 ```
-✅ Product brief added to issue
+✅ Product brief added to issue: [issue-url]
 
 📊 Brief Status: COMPLETE
 🎯 Riskiest Assumption: [What to test first]
 ⏱️  Validation Plan: Defined with clear success/kill criteria
-🚀 Next step: @tech [issue-url] to assess technical complexity
 
-Full specification posted as comment on the GitHub issue.
+═══════════════════════════════════════════════════
+📋 FULL PRODUCT BRIEF (Review Below):
+═══════════════════════════════════════════════════
+
+[Display complete comment here exactly as posted to GitHub, including:
+- Problem statement
+- Solution approach
+- Target audience
+- User experience
+- Technical implementation
+- Limitations & trade-offs
+- Prototype & learning plan with riskiest assumptions
+- PMF success metrics]
+
+═══════════════════════════════════════════════════
+
+✋ CHECKPOINT: Review the product brief and assumptions above.
+
+Would you like to:
+1. ✅ **Continue** - Proceed to @tech (technical assessment)
+2. 🔄 **Revise** - Make changes to the brief before continuing
+3. ⏸️  **Stop** - Pause here, you'll manually invoke @tech later
+
+Please respond with: "continue", "revise [your changes]", or "stop"
 ```
+
+**If user responds "continue":**
+- Automatically invoke @tech with the issue URL
+
+**If user responds "revise [details]":**
+- Update the GitHub issue comment with requested changes
+- Show updated content
+- Ask checkpoint question again
+
+**If user responds "stop":**
+- Provide manual next steps
+- Exit gracefully
 
 ---
 

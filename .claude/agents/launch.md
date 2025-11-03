@@ -46,7 +46,40 @@ Create a SEPARATE repository for prototype implementation and set up the initial
 
 ## Your Launch Process
 
-### Phase A: Request User Approval
+### Phase A: Display Summary to Terminal
+
+**FIRST**: Before requesting approval, show the user a summary in the terminal of what will be created:
+
+```
+🚀 LAUNCH AGENT - Ready to Create Implementation Repository
+
+═══════════════════════════════════════════════════
+📋 SUMMARY OF ALL RESEARCH:
+═══════════════════════════════════════════════════
+
+**Product Name**: [From spec]
+**Classification**: [PRODUCT/TOOL from idea]
+**Core JTBD**: [From idea]
+
+**Market Validation**: [GO/NO-GO/PIVOT from research, if PRODUCT]
+**Pain Score**: [X/30 from research, if PRODUCT]
+**TAM/SAM/SOM**: [Summary from research, if PRODUCT]
+
+**Riskiest Assumptions**: [From spec]
+**Success Metrics**: [From spec]
+
+**Technical Complexity**: [X/10 from tech]
+**Recommended Stack**: [From tech]
+**MVP Timeline**: [X weeks from tech]
+
+═══════════════════════════════════════════════════
+
+I will now request approval in the GitHub issue to create a new repository.
+```
+
+---
+
+### Phase B: Request User Approval in GitHub Issue
 
 **Tools**: GitHub issue comment (via gh CLI)
 
@@ -79,13 +112,13 @@ I will:
 Repository will NOT be created until you approve."
 ```
 
-**Wait for user response before proceeding to Phase B.**
+**Wait for user response before proceeding to Phase C.**
 
 If user responds with approval, continue. If not, wait or make requested revisions.
 
 ---
 
-### Phase B: Extract All Research from Issue
+### Phase C: Extract All Research from Issue
 
 **Tools**: Read (GitHub issue via gh CLI), Bash
 
@@ -121,7 +154,7 @@ Extract and organize:
 
 ---
 
-### Phase C: Create NEW Repository
+### Phase D: Create NEW Repository
 
 **Tools**: Bash (gh CLI)
 
@@ -138,7 +171,7 @@ cd [prototype-name]
 
 ---
 
-### Phase D: Create Consolidated Product Documentation (IN NEW REPO!)
+### Phase E: Create Consolidated Product Documentation (IN NEW REPO!)
 
 **Tools**: Write (IN NEW REPO ONLY)
 
@@ -268,7 +301,7 @@ Create a comprehensive **product.md** file that consolidates ALL research:
 
 ---
 
-### Phase E: Create Supporting Documentation (IN NEW REPO!)
+### Phase F: Create Supporting Documentation (IN NEW REPO!)
 
 **Tools**: Write (IN NEW REPO ONLY)
 
@@ -377,7 +410,7 @@ This is the **[Product Name]** prototype. All product research, specifications, 
 
 ---
 
-### Phase F: Initialize Project Structure (IN NEW REPO!)
+### Phase G: Initialize Project Structure (IN NEW REPO!)
 
 **Tools**: Bash, Write (IN NEW REPO ONLY)
 
@@ -402,7 +435,7 @@ pip freeze > requirements.txt
 
 ---
 
-### Phase G: Commit and Push Initial Setup (IN NEW REPO!)
+### Phase H: Commit and Push Initial Setup (IN NEW REPO!)
 
 **Tools**: Bash (IN NEW REPO ONLY)
 
@@ -422,7 +455,7 @@ git push origin main
 
 ---
 
-### Phase H: Update Original Issue with Link (IN PROTOTYPES REPO)
+### Phase I: Update Original Issue with Link (IN PROTOTYPES REPO)
 
 **Tools**: Bash (gh CLI)
 

@@ -262,18 +262,54 @@ Add a comment to the GitHub issue with this structure:
 
 ## Output to User (after posting comment)
 
+After posting the comment, display the FULL technical analysis in the terminal for user review:
+
 ```
-✅ Technical analysis added to issue
+✅ Technical analysis added to issue: [issue-url]
 
 🎯 Complexity: [X/10]
 ⏱️  MVP Timeline: [X weeks]
 💡 Recommended Approach: [Option name]
 ⚠️  Main Risk: [Key concern]
+✅ Technical Go/No-Go: [Verdict]
 
-Full analysis posted as comment on the GitHub issue.
+═══════════════════════════════════════════════════
+📋 FULL TECHNICAL ANALYSIS (Review Below):
+═══════════════════════════════════════════════════
 
-Next step: @launch [issue-url] (if GO decision)
+[Display complete comment here exactly as posted to GitHub, including:
+- Complexity assessment with score and justification
+- Core technical challenges
+- 3 implementation options (simple/balanced/robust)
+- Key tradeoffs (build vs buy, performance vs simplicity, cost vs quality)
+- Technical risks and mitigations
+- Technical go/no-go verdict
+- Recommended path forward with technology stack]
+
+═══════════════════════════════════════════════════
+
+✋ CHECKPOINT: Review the technical analysis and implementation options above.
+
+Would you like to:
+1. ✅ **Continue** - Proceed to @launch (create implementation repository)
+2. 🔄 **Revise** - Make changes to the analysis before continuing
+3. ⏸️  **Stop** - Pause here, you'll manually invoke @launch later
+
+Please respond with: "continue", "revise [your changes]", or "stop"
 ```
+
+**If user responds "continue":**
+- Automatically invoke @launch with the issue URL
+- Note: @launch will request approval before creating the new repository
+
+**If user responds "revise [details]":**
+- Update the GitHub issue comment with requested changes
+- Show updated content
+- Ask checkpoint question again
+
+**If user responds "stop":**
+- Provide manual next steps
+- Exit gracefully
 
 ---
 

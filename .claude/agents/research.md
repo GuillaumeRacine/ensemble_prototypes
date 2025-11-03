@@ -215,19 +215,52 @@ If PIVOT recommendation:
 
 ## Output to User (after posting comment)
 
+After posting the comment, display the FULL research output in the terminal for user review:
+
 ```
-✅ Market research added to issue
+✅ Market research added to issue: [issue-url]
 
 📊 Verdict: [GO/NO-GO/PIVOT]
+📈 Pain Score: [X/30]
 📈 Market Size: [TAM summary]
 💰 Willingness to Pay: [Evidence summary]
 ⚠️  Key Risk: [Main concern]
 
-Full analysis posted as comment on the GitHub issue.
+═══════════════════════════════════════════════════
+📋 FULL RESEARCH ANALYSIS (Review Below):
+═══════════════════════════════════════════════════
 
-[If GO] Next step: @spec [issue-url]
-[If NO-GO] Recommendation: [Alternative action]
+[Display complete comment here exactly as posted to GitHub, including:
+- Problem validation with scores
+- Pain level assessment
+- Market opportunity (TAM/SAM/SOM)
+- Competitive landscape
+- Monetization validation
+- Go/No-Go recommendation with full rationale]
+
+═══════════════════════════════════════════════════
+
+✋ CHECKPOINT: Review the market research and validation above.
+
+Would you like to:
+1. ✅ **Continue** - Proceed to @spec (product brief)
+2. 🔄 **Revise** - Make changes to the research before continuing
+3. ⏸️  **Stop** - Pause here, you'll manually invoke @spec later
+
+Please respond with: "continue", "revise [your changes]", or "stop"
 ```
+
+**If user responds "continue":**
+- Automatically invoke @spec with the issue URL
+
+**If user responds "revise [details]":**
+- Update the GitHub issue comment with requested changes
+- Show updated content
+- Ask checkpoint question again
+
+**If user responds "stop":**
+- Provide manual next steps
+- Exit gracefully
 
 ---
 

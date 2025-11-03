@@ -114,16 +114,58 @@ Add labels: `customer-letters`, `jtbd`, `needs-research`, `[product/tool]`
 
 ---
 
-## Step 4: Output to User
+## Step 4: Display Output in Terminal
 
-After creating the issue, provide:
+After creating the issue, display the FULL content in the terminal for user review:
 
-1. ✅ **Issue URL**
-2. ✅ **Classification** (PRODUCT vs TOOL)
-3. ✅ **Synthesized JTBD** summary
-4. ✅ **Next steps** based on classification:
-   - **PRODUCT**: "Next: @research → @spec → @tech"
-   - **TOOL**: "Next: @spec → @tech (skip market validation)"
+1. Show the complete issue body that was posted to GitHub
+2. Include all customer letters
+3. Show JTBD synthesis
+4. Show classification and rationale
+
+---
+
+## Step 5: Checkpoint - Ask User to Continue
+
+After displaying the output, ask the user:
+
+```
+✅ GitHub Issue Created: [issue-url]
+
+📊 Classification: [PRODUCT/TOOL]
+
+🎯 Core JTBD: [summary]
+
+═══════════════════════════════════════════════════
+📋 FULL ISSUE CONTENT (Review Below):
+═══════════════════════════════════════════════════
+
+[Display complete issue body here exactly as posted to GitHub]
+
+═══════════════════════════════════════════════════
+
+✋ CHECKPOINT: Review the customer letters and problem framing above.
+
+Would you like to:
+1. ✅ **Continue** - Proceed to next agent (@research for PRODUCT, @spec for TOOL)
+2. 🔄 **Revise** - Make changes to the issue before continuing
+3. ⏸️  **Stop** - Pause here, you'll manually invoke next agent later
+
+Please respond with: "continue", "revise [your changes]", or "stop"
+```
+
+**If user responds "continue":**
+- For PRODUCT: Automatically invoke @research with the issue URL
+- For TOOL: Automatically invoke @spec with the issue URL
+
+**If user responds "revise [details]":**
+- Update the GitHub issue with requested changes
+- Show updated content
+- Ask checkpoint question again
+
+**If user responds "stop":**
+- Provide manual next steps
+- Exit gracefully
 
 ---
 
@@ -138,13 +180,43 @@ The idea has clear monetization potential - developers would pay for automated A
 🎯 Core JTBD:
 "Help me avoid API rate limit errors so I can build reliable applications without manual monitoring overhead."
 
-📍 Next Steps:
-Since this is a PRODUCT idea, follow this sequence:
-1. @research https://github.com/user/prototypes/issues/42 (validate market)
-2. @spec https://github.com/user/prototypes/issues/42 (create brief)
-3. @tech https://github.com/user/prototypes/issues/42 (assess complexity)
+═══════════════════════════════════════════════════
+📋 FULL ISSUE CONTENT (Review Below):
+═══════════════════════════════════════════════════
 
-All work will be documented in the GitHub issue. No code is written in this repository.
+## 💡 Original Idea
+A developer tool that automatically tracks and manages API rate limits across multiple services...
+
+## 🏷️ Idea Classification
+**Type:** PRODUCT
+**Rationale:** Clear monetization potential - SaaS teams would pay to prevent API downtime...
+
+## 🗣️ Customer Letters: Problem Framings
+
+### Customer Letter #1: Sarah - Backend Developer at Growing Startup
+"I'm managing integrations with 8 different APIs in our product. Each has different rate limits...
+[full letter content]
+
+### Customer Letter #2: Mike - DevOps Engineer at Enterprise Company
+[full letter content]
+
+### Customer Letter #3: Jessica - Solo Developer Building Side Project
+[full letter content]
+
+## 🎯 Synthesized JTBD
+**Primary Job:** Help me avoid API rate limit errors so I can build reliable applications...
+[full synthesis]
+
+═══════════════════════════════════════════════════
+
+✋ CHECKPOINT: Review the customer letters and problem framing above.
+
+Would you like to:
+1. ✅ **Continue** - Proceed to @research (market validation)
+2. 🔄 **Revise** - Make changes to the issue before continuing
+3. ⏸️  **Stop** - Pause here, you'll manually invoke @research later
+
+Please respond with: "continue", "revise [your changes]", or "stop"
 ```
 
 ---
