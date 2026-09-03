@@ -1,216 +1,74 @@
-# Ensemble Prototypes
+# Ensemble Prototypes — Source of Truth for Product Ideation & Research
 
-A structured ideation and research space for validating prototype concepts before implementation.
+Status: **active operating repo** (revived 2026-09-02; card schema + promotion rule shipped 2026-09-03).
 
----
+Single durable home for every product/tool idea: capture, research, validation, spec — before any code.
 
-## 🚨 CRITICAL: GitHub Issues Only - Zero Code Policy
+**Decision (Gui):** This repo is the SoT for ALL product ideation and research work. Slack `#discuss` is the front door for intake; approved ideas land here as cards. Implementation lives ONLY in separate repos created at launch/promote.
 
-### What This Repository IS:
-✅ **GitHub Issues Board** for tracking prototype ideas
-✅ **Research documentation** and market analysis
-✅ **Product specifications** and technical assessments
-✅ **Assumption frameworks** and validation plans
-
-### What This Repository IS NOT:
-❌ **NO implementation code** (Python, JavaScript, etc.)
-❌ **NO application files** (package.json, requirements.txt for apps)
-❌ **NO deployment configs** (Dockerfile, docker-compose.yml for apps)
-❌ **NO application dependencies** or build systems
-
-### Where Code Lives:
-🎯 **Each validated prototype gets its own separate repository**
-🎯 **Implementation happens ONLY in those new repos**
-🎯 **This repo remains pure research and planning**
+Tracking discuss item: `disc-d142335bd807`.
 
 ---
 
-## 🤖 Subagents Workflow
+## Scope contract
 
-This repository uses specialized AI agents that work sequentially to validate ideas:
+- Idea intake + approval gate → Slack `#discuss` (discuss-intake workflow)
+- Durable idea cards, research, validation, specs → **this repo** (GitHub issues)
+- Implementation code → separate repo per prototype (created at promote/launch)
+- Parked ideas archive → this repo, `parked` label + revisit date
+- Personal ops (non-prototype) → hermes kanban `admin` — NOT here
 
-### Agent 1: Idea Capture → `@idea`
-- Transforms ideas into customer-centric problem statements
-- Creates GitHub issue with customer letters (Amazon Working Backwards method)
-- Classifies as PRODUCT (needs market validation) or TOOL (personal use)
-
-### Agent 2: Market Research → `@research`
-- **Only runs for PRODUCT ideas** (skipped for TOOLs)
-- Validates market opportunity and willingness to pay
-- Adds research findings to the GitHub issue
-
-### Agent 3: Product Brief → `@spec`
-- Synthesizes all research into comprehensive product brief
-- Defines testable assumptions and success criteria
-- Adds final specification to the GitHub issue
-
-### Agent 4: Technical Analysis → `@tech`
-- Assesses technical complexity and implementation options
-- Evaluates build vs buy vs integrate tradeoffs
-- Adds technical assessment to the GitHub issue
-
-### Agent 5: Implementation Launch → `@launch`
-- **Creates NEW repository** for the prototype
-- Sets up development environment in the NEW repo
-- **Code lives ONLY in the new repo, NOT here**
+One GitHub issue = one idea card. **Zero implementation code in this repo.**
 
 ---
 
-## 🎯 How to Use This Repository
-
-### Step 1: Start with an Idea
-```bash
-# In this repository, invoke the idea agent
-@idea "your one-sentence product/tool idea"
-```
-
-**Output**: New GitHub issue with customer problem framing
-
-### Step 2: Validate the Market (PRODUCTS only)
-```bash
-# On the GitHub issue created in Step 1
-@research [issue-url]
-```
-
-**Output**: Market research added as comment to the issue
-**Skip this step for personal TOOLS**
-
-### Step 3: Create Product Brief
-```bash
-# On the same GitHub issue
-@spec [issue-url]
-```
-
-**Output**: Comprehensive product specification added to the issue
-
-### Step 4: Assess Technical Feasibility
-```bash
-# On the same GitHub issue
-@tech [issue-url]
-```
-
-**Output**: Technical analysis added as comment to the issue
-
-### Step 5: Launch Implementation (separate repo!)
-```bash
-# On the same GitHub issue with completed analysis
-@launch [issue-url]
-```
-
-**Output**: NEW repository created with prototype code
-**This repo remains code-free!**
-
----
-
-## 📋 What Lives in GitHub Issues
-
-Each prototype idea is tracked as a GitHub issue containing:
-
-1. **Customer Letters** (from idea)
-   - First-person problem narratives
-   - Jobs-to-be-done statements
-   - Current pain points and alternatives
-
-2. **Market Research** (from research, PRODUCTS only)
-   - Problem validation with data sources
-   - Competitive landscape analysis
-   - TAM/SAM/SOM sizing
-   - Monetization validation
-
-3. **Product Brief** (from spec)
-   - Complete product specification
-   - Testable assumptions framework
-   - Prototype and learning plan
-   - Clear success metrics
-
-4. **Technical Assessment** (from tech)
-   - Complexity scoring and justification
-   - Implementation options with tradeoffs
-   - Technology stack recommendations
-   - Risk analysis and mitigation
-
-5. **Link to Implementation** (from launch)
-   - Repository URL for the prototype
-   - Setup instructions
-   - Initial development status
-
----
-
-## 🗂️ Repository Structure
+## Card lifecycle
 
 ```
-Prototypes/                           # THIS REPO (no code!)
-├── .claude/
-│   └── agents/                       # Agent definitions
-│       ├── idea.md                  # Customer letters generator
-│       ├── research.md              # Market researcher
-│       ├── spec.md                  # Product brief synthesizer
-│       ├── tech.md                  # Technical analyst
-│       └── launch.md                # Implementation launcher
-├── README.md                         # This file
-├── CLAUDE.md                         # Claude Code instructions
-└── CUSTOM_PROMPTS.md                 # Agent documentation
-
-[prototype-name]/                     # NEW REPO (has code!)
-├── src/                              # Application code
-├── tests/                            # Test suites
-├── package.json / requirements.txt   # Dependencies
-└── README.md                         # Setup instructions
+raw → research → validate → spec → tech → ready → building → learned
+                                   ↘ parked (dated)   ↘ absorbed (live repo owns it)
 ```
 
----
+- **WIP=1**: at most ONE card in `ready`+`building` combined.
+- **≤3 non-parked bets** at any time. Everything else is parked or absorbed.
+- PRODUCT cards need research evidence before spec. TOOL cards skip market research.
+- OPS items route out within 7 days.
+- 30 days with no new evidence → `parked` with revisit date.
+- `absorbed`: live repo owns the work; card stays as pointer only.
 
-## 🎨 Design Philosophy
+Full promote gate: [`PROMOTION.md`](./PROMOTION.md).
 
-1. **Separate concerns**: Research here, code elsewhere
-2. **GitHub issues as source of truth**: All decisions documented
-3. **Agent specialization**: Each agent has one clear job
-4. **Context isolation**: Agents can swap context efficiently
-5. **Evidence-based decisions**: Real data, not assumptions
-6. **Clear handoffs**: Each agent builds on previous work
+## Required card fields
 
----
+Use the **Idea Card** issue template (`.github/ISSUE_TEMPLATE/idea_card.md`):
 
-## 🔍 Example Prototypes
+one-liner, type (PRODUCT/TOOL/OPS), problem, why-you, current alternative, riskiest assumption, 24h-done definition, kill criterion, token/time budget, evidence log, links.
 
-Browse our GitHub issues to see prototypes in various stages:
-- **Issue #1**: Template for new prototype ideas
-- **Issue #2**: AI Sprint Retrospective Tool
-- **Issue #3**: Present Agent (Gift Recommendation Platform)
+A card cannot leave `raw` until all fields are filled.
 
-Each issue shows the complete journey from idea to implementation link.
+## Labels
 
----
+- Workflow (one at a time): `workflow: idea|research|spec|tech|launch`
+- Type: `type: PRODUCT` / `type: TOOL` / `type: OPS`
+- Disposition: `parked`, `absorbed`, `status: in-progress`
 
-## ⚡ Quick Start
+## Board
 
-```bash
-# 1. Have an idea? Start here:
-@idea "I want to build X to solve Y for Z users"
+Project #4 `ensemble_prototypes` (GitHub Projects v2): Raw → Research → Validate → Spec/Tech → Ready → Building → Learned → Parked.
 
-# 2. Follow the agents sequentially on the created GitHub issue
+## Intake bridge
 
-# 3. When ready, launch implementation in a NEW repo:
-@launch [issue-url]
+`#discuss` → Hermes discuss-intake packet → Gui picks `act` → agent opens a card here from the Idea Card template → labels `workflow: idea` + type. Discuss thread URL goes in Links.
 
-# 4. Continue development in the NEW repository
-# 5. This repo stays clean - just issues and docs!
-```
+Local 24h learning factory (optional dogfood): `~/.hermes/factory/` + `factory_cli.py`. Does not replace this SoT.
 
----
+## 2026-09-02 triage baseline (still open work)
 
-## 🚫 Enforcement: What NOT to Do
+24 open → target ≤3 non-parked + parked/absorbed rest. Not executed in the schema/promotion ship.
 
-**DO NOT** add these to this repository:
-- Source code files (`.py`, `.js`, `.ts`, `.go`, etc.)
-- Package managers (`package.json`, `requirements.txt`, `go.mod`)
-- Build configs (`webpack.config.js`, `vite.config.ts`)
-- Docker files (`Dockerfile`, `docker-compose.yml`) for applications
-- Environment files (`.env`, `.env.example`) for applications
-- Node modules, virtual environments, or build artifacts
+- Absorbed candidates (live repo owns it): #15 Present, #54 Tao Book, #40 Substack Growth, #51 Ian/Investment, #55 Music Gear, #31 Shopify API ops
+- Merge candidates: #36+#37 (POD), #45+#46 (Stoic OS), #52 media, #39 research-screening spine
+- Park candidates: #41, #42, #43, #44, #47, #48, #49, #50, #53, #24, #13, #38
+- Keep ≤3: research spine, Present absorbed-track, one open slot
 
-**Exception**: Research tools that support the workflow itself (like `solana_clm_monitor.py` for research purposes) are OK as they don't represent prototype implementations.
-
----
-
-**Remember**: This is a thinking space, not a coding space. Ideas mature here, implementations happen elsewhere.
+Say `act triage` in the discuss thread when you want that sweep run.
